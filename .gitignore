@@ -1,0 +1,11 @@
+# Ignore Unity Library and PackageCache
+Library/
+PackageCache/
+
+# Ignore specific large files
+*.so
+*.dll
+*.dylib
+
+# Ignore specific directories or files
+/Library/PackageCache/com.unity.burst@1.8.15/ 
