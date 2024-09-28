@@ -6,6 +6,7 @@ public enum PlayerState
 {
     Idle,
     Walking,
+    Crouching,
     Running,
     Hiding,
     Paused
@@ -18,11 +19,13 @@ public class Player : MonoBehaviour
     public PlayerState currentState = PlayerState.Idle;
 
     [SerializeField] public float sensitivity;
+    [SerializeField] float crouchSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float lerpSpeed = 5f;
 
     float movementSpeed;
+    float noiseAmplifier;
     
     //Camera
     private float verticalRotation = 0f;
@@ -59,6 +62,10 @@ public class Player : MonoBehaviour
         {
             other.GetComponent<Item>().canInteract = true;
         }
+        else if (other.CompareTag("Door"))
+        {
+            other.GetComponent<Door>().canInteract = true; 
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -66,6 +73,10 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             other.GetComponent<Item>().canInteract = false;
+        }
+        else if (other.CompareTag("Door"))
+        {
+            other.GetComponent<Door>().canInteract = false; 
         }
     }
 
@@ -98,8 +109,18 @@ public class Player : MonoBehaviour
         {
             movementSpeed = Mathf.Lerp(movementSpeed, walkSpeed, lerpSpeed * Time.deltaTime);
         }
+        else if(currentState == PlayerState.Crouching)
+        {
+            movementSpeed = Mathf.Lerp(movementSpeed, crouchSpeed, lerpSpeed * Time.deltaTime);
+        }
 
-        // Switch between states based on input
+        if (Input.GetKeyDown(KeyCode.LeftControl)){
+            currentState = PlayerState.Crouching;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl)){
+            currentState = PlayerState.Walking;
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             currentState = PlayerState.Running;
@@ -107,6 +128,19 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             currentState = PlayerState.Walking;
+        }
+    }
+
+    void NoiseHandler()
+    {
+        if(currentState == PlayerState.Running){
+            noiseAmplifier = 2;
+        }
+        else if(currentState == PlayerState.Walking){
+            noiseAmplifier = 1;
+        }
+        else{
+            noiseAmplifier = 0;
         }
     }
 
@@ -150,5 +184,15 @@ public class Player : MonoBehaviour
     {
         inventory.Remove(item);
         Destroy(item.gameObject);
+    }
+
+    public Item SearchInventoryForItemCode(int code)
+    {
+        foreach(Item item in inventory){
+            if(item.code == code){
+                return item;
+            }
+        }
+        return null;
     }
 }
