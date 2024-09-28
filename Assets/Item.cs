@@ -7,6 +7,8 @@ public abstract class Item : MonoBehaviour
     Player player;
     public bool canInteract;
 
+    [SerializeField] public int code;
+
     protected AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -25,7 +27,7 @@ public abstract class Item : MonoBehaviour
     public void Interact()
     {
         if(canInteract && Input.GetKeyDown(KeyCode.E)){
-            Debug.Log("item picked up");
+            Debug.Log(this.name+"has been picked up");
             PickUp();
         }
     }
