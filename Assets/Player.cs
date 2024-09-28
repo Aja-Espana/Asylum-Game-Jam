@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     [SerializeField] float lerpSpeed = 5f;
 
     float movementSpeed;
+    
+    //Camera
+    private float verticalRotation = 0f;
+
+    //Inventory
+    public List<Item> inventory = new List<Item>();
 
     // Start is called before the first frame update
     void Start()
@@ -44,8 +50,23 @@ public class Player : MonoBehaviour
     {
         
         Movement();
-
         HandleCursor();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            other.GetComponent<Item>().canInteract = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            other.GetComponent<Item>().canInteract = false;
+        }
     }
 
     void Movement()
@@ -91,18 +112,15 @@ public class Player : MonoBehaviour
 
     void LookMovement()
     {
+        
         float h = sensitivity * Input.GetAxis("Mouse X");
         float v = sensitivity * -Input.GetAxis("Mouse Y");
 
-        if(camera.transform.rotation.x > 180f){
-            camera.transform.rotation = Quaternion.Euler(-180f, 0, 0);
-        }
-        else if(camera.transform.rotation.x < -180f){
-            camera.transform.rotation = Quaternion.Euler(-180f, 0, 0);
-        }
-        
+        verticalRotation += v;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+
         transform.Rotate(0, h, 0);
-        camera.transform.Rotate(v, 0, 0);        
+        camera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
     }
 
     void HandleCursor()
@@ -115,5 +133,22 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    //Inventory    
+
+    public void AddItem(Item item)
+    {
+        inventory.Add(item);
+
+        item.gameObject.SetActive(false);
+        item.GetComponent<Collider>().enabled = false;
+        item.transform.position = transform.position;
+    }
+
+    public void RemoveItem(Item item)
+    {
+        inventory.Remove(item);
+        Destroy(item.gameObject);
     }
 }
