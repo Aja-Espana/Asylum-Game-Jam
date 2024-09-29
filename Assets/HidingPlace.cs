@@ -12,6 +12,9 @@ public class HidingPlace : MonoBehaviour
     [SerializeField] string hideAnimationName;
     [SerializeField] string unhideAnimationName;
 
+    [SerializeField] AudioClip hideSound;
+    [SerializeField] AudioClip unhideSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class HidingPlace : MonoBehaviour
             Animator anim = player.GetComponent<Animator>();
             anim.Play(hideAnimationName, 0, 0.0f);
 
+            AudioSource.PlayClipAtPoint(hideSound, transform.position);
             isOccupied = true;
         }
     }
@@ -45,6 +49,7 @@ public class HidingPlace : MonoBehaviour
             Animator anim = player.GetComponent<Animator>();
             anim.Play(unhideAnimationName, 0, 0.0f);
 
+            AudioSource.PlayClipAtPoint(unhideSound, transform.position);
             isOccupied = false;
         }
     }

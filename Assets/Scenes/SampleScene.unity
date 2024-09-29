@@ -5693,6 +5693,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &864882946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864882929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0537b74149c4f4842bca003c17158105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stress: 0
+  fullscreenMaterial: {fileID: -876546973899608171, guid: d8c592affefb77f468c8b3c08792f591,
+    type: 3}
 --- !u!1 &880725177
 GameObject:
   m_ObjectHideFlags: 0
@@ -5933,6 +5948,7 @@ MonoBehaviour:
   normalIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   interactIcon: {fileID: 21300000, guid: 092b7c77e5e05474693c7233afe26d9e, type: 3}
   lockedIcon: {fileID: 21300000, guid: 2d86e9cf8f05b9947a2c24d009b23394, type: 3}
+  hideIcon: {fileID: 21300000, guid: c89889e52024eb645acc919bac9a8b45, type: 3}
 --- !u!1 &1439080494
 GameObject:
   m_ObjectHideFlags: 0
@@ -6210,6 +6226,8 @@ MonoBehaviour:
   isOccupied: 0
   hideAnimationName: something
   unhideAnimationName: somethingelse
+  hideSound: {fileID: 8300000, guid: 7fe3a0475dc4df84abaf23f252085345, type: 3}
+  unhideSound: {fileID: 8300000, guid: 19e015ea740094b489e8f7b41be8e9ed, type: 3}
 --- !u!65 &1601057541
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7019,6 +7037,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 377564570675171990, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_Depth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377564570675171990, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377564570675171990, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: field of view
+      value: 60.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 377564570675171990, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_FocalLength
+      value: 20.78461
+      objectReference: {fileID: 0}
+    - target: {fileID: 377564570675171990, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 377564570675171990, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1076837840066997698, guid: 678e879b84f78a949b363937ddcae283,
         type: 3}
       propertyPath: m_Enabled
@@ -7028,6 +7076,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522516137026316443, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_Dithering
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2522516137026316443, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2883134769682411491, guid: 678e879b84f78a949b363937ddcae283,
         type: 3}
@@ -7112,6 +7170,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 864882937}
+    - targetCorrespondingSourceObject: {fileID: 3248691772813624396, guid: 678e879b84f78a949b363937ddcae283,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 864882946}
   m_SourcePrefab: {fileID: 100100000, guid: 678e879b84f78a949b363937ddcae283, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

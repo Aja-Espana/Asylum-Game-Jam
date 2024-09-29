@@ -10,6 +10,7 @@ public class Crosshair : MonoBehaviour
     [SerializeField] Sprite normalIcon;
     [SerializeField] Sprite interactIcon;
     [SerializeField] Sprite lockedIcon;
+    [SerializeField] Sprite hideIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,10 @@ public class Crosshair : MonoBehaviour
     }
 
     void HandleCrosshairChange(){
-        if(player.currentTarget == null){
+        if(player.isPaused){
+            image.sprite = null;
+        }
+        else if(player.currentTarget == null){
            image.sprite = normalIcon; 
            image.rectTransform.sizeDelta = new Vector2(10f,10f);
         }
@@ -42,6 +46,10 @@ public class Crosshair : MonoBehaviour
                 image.sprite = interactIcon;
                 image.rectTransform.sizeDelta = new Vector2(50f,50f);
             }
+        }
+        else if(player.currentTarget.GetComponent<HidingPlace>() != null){
+            image.sprite = hideIcon;
+            image.rectTransform.sizeDelta = new Vector2(50f,50f);
         }
     }
 }

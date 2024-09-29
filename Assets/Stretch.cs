@@ -19,13 +19,11 @@ public enum StalkDecision
     Hide
 }
 
-public class Stretch : MonoBehaviour
+public class Stretch : Entity
 {
-    int aggro = 0;
-
     Vector3 targetedLocation;
     bool canSeePlayer;
-    StretchState currentState;
+    public StretchState currentState;
 
     Corner currentCorner;
 
