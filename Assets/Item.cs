@@ -35,6 +35,7 @@ public abstract class Item : MonoBehaviour
     public void PickUp()
     {
         player.AddItem(this);
+        player.currentTarget = null;
         PlaySound();
     }
 

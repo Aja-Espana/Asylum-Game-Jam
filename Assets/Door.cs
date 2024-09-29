@@ -14,6 +14,7 @@ public class Door : MonoBehaviour
 
     [SerializeField] AudioClip openSound;
     [SerializeField] AudioClip closeSound;
+    [SerializeField] AudioClip unlockSound;
 
     //[SerializeField] string doorName;
     [SerializeField] int doorCode;
@@ -21,7 +22,7 @@ public class Door : MonoBehaviour
     public bool canInteract = false;
 
     bool isDoorOpen = false;
-    [SerializeField] bool isDoorLocked = true;
+    [SerializeField] public bool isDoorLocked = true;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,7 @@ public class Door : MonoBehaviour
                 UseKey();
                 Debug.Log("Opening door");
                 doorAnim.Play(openAnimationName, 0, 0.0f);
+                AudioSource.PlayClipAtPoint(unlockSound, transform.position);
                 AudioSource.PlayClipAtPoint(openSound, transform.position);
                 isDoorOpen = true;
             }
