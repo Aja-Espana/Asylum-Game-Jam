@@ -9,7 +9,6 @@ public enum PlayerState
     Crouching,
     Running,
     Hiding,
-    Paused
 }
 
 public class Player : MonoBehaviour
@@ -26,6 +25,10 @@ public class Player : MonoBehaviour
 
     float movementSpeed;
     float noiseAmplifier;
+
+    public GameObject currentTarget;
+
+    public bool isPaused;
     
     //Camera
     private float verticalRotation = 0f;
@@ -44,15 +47,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        LookMovement();
-        MovementSpeed();
+        if(!isPaused){
+            LookMovement();
+            MovementSpeed();
+        }
+
+
+        PauseHandler();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!isPaused){
+            Movement();
+        }
         
-        Movement();
         HandleCursor();
     }
 
@@ -61,11 +71,20 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             other.GetComponent<Item>().canInteract = true;
+            currentTarget = other.gameObject;
         }
         else if (other.CompareTag("Door"))
         {
             other.GetComponent<Door>().canInteract = true; 
+            currentTarget = other.gameObject;
         }
+        else if (other.CompareTag("HidingPlace"))
+        {
+            other.GetComponent<HidingPlace>().canInteract = true;
+            currentTarget = other.gameObject;
+        }
+
+        
     }
 
     void OnTriggerExit(Collider other)
@@ -73,29 +92,37 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             other.GetComponent<Item>().canInteract = false;
+            currentTarget = null;
         }
         else if (other.CompareTag("Door"))
         {
-            other.GetComponent<Door>().canInteract = false; 
+            other.GetComponent<Door>().canInteract = false;
+            currentTarget = null;
+        }
+        else if (other.CompareTag("HidingPlace"))
+        {
+            other.GetComponent<HidingPlace>().canInteract = false;
+            currentTarget = null;
         }
     }
 
     void Movement()
     {
-		if(Input.GetKey(KeyCode.A)) {
-			rb.position += -transform.right * Time.deltaTime * movementSpeed;
-		}
-		else if(Input.GetKey(KeyCode.D)) {
-			rb.position += transform.right * Time.deltaTime * movementSpeed;
-		}
+        if(currentState != PlayerState.Hiding){
+            if(Input.GetKey(KeyCode.A)) {
+                rb.position += -transform.right * Time.deltaTime * movementSpeed;
+            }
+            else if(Input.GetKey(KeyCode.D)) {
+                rb.position += transform.right * Time.deltaTime * movementSpeed;
+            }
 
-		if(Input.GetKey(KeyCode.W)) {
-			rb.position += transform.forward * Time.deltaTime * movementSpeed;
-		}
-		else if(Input.GetKey(KeyCode.S)) {
-			rb.position += -transform.forward * Time.deltaTime * movementSpeed;
-		}
-
+            if(Input.GetKey(KeyCode.W)) {
+                rb.position += transform.forward * Time.deltaTime * movementSpeed;
+            }
+            else if(Input.GetKey(KeyCode.S)) {
+                rb.position += -transform.forward * Time.deltaTime * movementSpeed;
+            }
+        }
     }
 
     void MovementSpeed()
@@ -159,7 +186,7 @@ public class Player : MonoBehaviour
 
     void HandleCursor()
     {
-        if(currentState == (PlayerState.Paused)){
+        if(isPaused){
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
@@ -194,5 +221,21 @@ public class Player : MonoBehaviour
             }
         }
         return null;
+    }
+
+    //System
+
+    public void PauseHandler()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            isPaused = !isPaused;
+        }
+
+        if(isPaused){
+            Time.timeScale = 0;
+        }
+        else{
+            Time.timeScale = 1;
+        }
     }
 }
