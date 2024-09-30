@@ -21,12 +21,12 @@ public abstract class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Interact();
+        
     }
 
     public void Interact()
     {
-        if(canInteract && Input.GetKeyDown(KeyCode.E)){
+        if(Input.GetKeyDown(KeyCode.E)){
             Debug.Log(this.name+"has been picked up");
             PickUp();
         }
