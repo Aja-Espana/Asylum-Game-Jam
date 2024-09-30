@@ -24,11 +24,12 @@ public class HidingPlace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Unhide();
-        Hide();
+        if(isOccupied){
+            Unhide();
+        }
     }
 
-    void Hide()
+    public void Hide()
     {
         if(canInteract && Input.GetKeyDown(KeyCode.E)){
             canInteract = false;
@@ -43,7 +44,7 @@ public class HidingPlace : MonoBehaviour
 
     void Unhide()
     {
-        if(isOccupied && Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space)){
             canInteract = true;
             player.currentState = PlayerState.Idle;
             Animator anim = player.GetComponent<Animator>();

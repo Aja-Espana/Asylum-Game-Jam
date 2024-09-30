@@ -7,15 +7,21 @@ public abstract class State
     protected StateMachine stateMachine;
     protected Entity monster;
 
+    protected Stretch stretch;
+
     // Constructor to set the state machine and monster references
     public State(StateMachine stateMachine, Entity monster)
     {
         this.stateMachine = stateMachine;
         this.monster = monster;
+
+        this.stretch = monster.GetComponent<Stretch>();
     }
 
     // Called when the state is entered
     public virtual void EnterState() { }
+
+    public abstract void Start();
 
     // Called on each frame while the state is active
     public abstract void Update();
@@ -32,6 +38,11 @@ public class IdleState : State
     {
         Debug.Log("Entering Idle State");
         stateMachine.RunCoroutine(WaitAndStalk());
+    }
+
+    public override void Start()
+    {
+
     }
 
     public override void Update()
@@ -65,10 +76,14 @@ public class StalkState : State{
         Debug.Log("Entering Idle State");
         stateMachine.RunCoroutine(BeginStalking());
     }
+    public override void Start()
+    {
+
+    }
 
     public override void Update()
     {
-
+        stretch.GoToNearestCorner(monster.player.transform.position);
     }
 
     // Coroutine to wait before transitioning to the Stalk state
@@ -98,9 +113,14 @@ public class ChaseState : State{
         stateMachine.RunCoroutine(BeginStalking());
     }
 
-    public override void Update()
+    public override void Start()
     {
 
+    }
+
+    public override void Update()
+    {
+monster.GetComponent<Stretch>();
     }
 
     // Coroutine to wait before transitioning to the Stalk state

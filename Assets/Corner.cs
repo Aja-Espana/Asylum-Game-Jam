@@ -19,4 +19,16 @@ public class Corner : MonoBehaviour
         
     }
 
+    void OnTriggerEnter(Collider col){
+        if(col.tag == "Player"){
+            isInVision = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col){
+        if(col.tag == "Player"){
+            isInVision = false;
+        }
+    }
+
 }
