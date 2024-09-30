@@ -5,9 +5,9 @@ using UnityEngine;
 public enum StretchState
 {
     Idle,
-    Patrolling,
     Stalking,
-    Sprinting
+    Hunting,
+    Chasing
 }
 
 public enum StalkDecision
@@ -31,6 +31,9 @@ public class Stretch : Entity
     void Start()
     {
         currentState = StretchState.Idle;
+
+        stateMachine = gameObject.AddComponent<StateMachine>();
+        stateMachine.SetState(new IdleState(stateMachine, this));        
     }
 
     // Update is called once per frame
@@ -43,12 +46,20 @@ public class Stretch : Entity
     {
         targetedLocation = presumedLocation;
 
-        if(currentState == StretchState.Patrolling){
-            aggro = 10;
-            currentState = StretchState.Stalking;
+        if(aggro < 20){
+            currentState = StretchState.Idle;
         }
-
-
+        else if(aggro >= 20 && aggro < 80){
+            if(aggro >= 60 && player.currentState == PlayerState.Hiding){
+                currentState = StretchState.Hunting;
+            }
+            else{
+                currentState = StretchState.Stalking;
+            }
+        }
+        else if(aggro >= 80){
+            currentState = StretchState.Chasing;
+        }
         
     }
 
@@ -74,9 +85,12 @@ public class Stretch : Entity
             }
         }
 
-        currentCorner = nearestCorner.GetComponent<Corner>();
-        gameObject.transform.position = currentCorner.transform.position;
-        currentCorner.isInhabited = true;  
+        if(nearestCorner != null){
+            currentCorner = nearestCorner.GetComponent<Corner>();
+            gameObject.transform.position = currentCorner.transform.position;
+            currentCorner.isInhabited = true;  
+        }
+
     }
 
     public void LeaveCurrentCorner()

@@ -50,6 +50,12 @@ public class Player : MonoBehaviour
         if(!isPaused){
             LookMovement();
             MovementSpeed();
+
+            if(currentState != PlayerState.Hiding){
+                InteractionRay();
+                InteractionHandler();
+            }
+            
         }
 
 
@@ -103,6 +109,52 @@ public class Player : MonoBehaviour
         {
             other.GetComponent<HidingPlace>().canInteract = false;
             currentTarget = null;
+        }
+    }
+    void InteractionRay()
+    {
+        Vector3 rayOrigin = transform.position;
+        
+        Vector3 rayDirection = camera.transform.forward;
+
+        Ray ray = new Ray(rayOrigin, rayDirection);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 2f);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.CompareTag("Item"))
+            {   
+                currentTarget = hit.collider.gameObject;
+                break;
+            }
+            else if (hit.collider.CompareTag("Door"))
+            {
+                currentTarget = hit.collider.gameObject;
+                break;
+            }
+            else if (hit.collider.CompareTag("HidingPlace"))
+            {
+                currentTarget = hit.collider.gameObject;
+                break;
+            }
+            currentTarget = null;
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction * 2f, Color.green);
+    }
+
+    void InteractionHandler()
+    {
+        if(currentTarget != null){
+            if(currentTarget.CompareTag("Item")){
+                currentTarget.GetComponent<Item>().Interact();
+            }
+            else if(currentTarget.CompareTag("Door")){
+                currentTarget.GetComponent<Door>().Interact();
+            }
+            else if(currentTarget.CompareTag("HidingPlace")){
+                currentTarget.GetComponent<HidingPlace>().Hide();
+            }
         }
     }
 

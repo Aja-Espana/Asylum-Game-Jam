@@ -7,7 +7,8 @@ public class Entity : MonoBehaviour
     string name;
     public float aggro;
 
-    public StateMachine stateMachine;
+    public Player player;
+    protected StateMachine stateMachine;
 
     // Start is called before the first frame update
     void Start()

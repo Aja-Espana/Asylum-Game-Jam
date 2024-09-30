@@ -35,7 +35,7 @@ public class CrouchingIcon : MonoBehaviour
                 targetAlpha = 0f;
             }
 
-            currentColor.a = Mathf.Lerp(currentColor.a, targetAlpha, Time.deltaTime * lerpSpeed * 1/Math.Abs(currentColor.a - targetAlpha));
+            currentColor.a = Mathf.Lerp(currentColor.a, targetAlpha, Time.unscaledDeltaTime * lerpSpeed * 1/Math.Abs(currentColor.a - targetAlpha));
             image.color = currentColor;
         }
         else{

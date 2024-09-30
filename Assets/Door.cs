@@ -35,12 +35,12 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Interact();
+
     }
 
-    void Interact()
+    public void Interact()
     {
-        if(canInteract && Input.GetKeyDown(KeyCode.E)){
+        if(Input.GetKeyDown(KeyCode.E)){
             if(!isDoorOpen){
                 OpenDoor();
             }
@@ -75,12 +75,10 @@ public class Door : MonoBehaviour
 
     void CloseDoor()
     {
-        if(canInteract && Input.GetKeyDown(KeyCode.E)){
-            Debug.Log("Closing door"); 
-            doorAnim.Play(closeAnimationName, 0, 0.0f);
-            AudioSource.PlayClipAtPoint(closeSound, transform.position);
-            isDoorOpen = false;
-        }
+        Debug.Log("Closing door"); 
+        doorAnim.Play(closeAnimationName, 0, 0.0f);
+        AudioSource.PlayClipAtPoint(closeSound, transform.position);
+        isDoorOpen = false;
     }
 
     void UseKey(){
