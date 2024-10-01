@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum StretchState
 {
@@ -27,19 +28,58 @@ public class Stretch : Entity
 
     Corner currentCorner;
 
+    Player player;
+    NavMeshAgent agent;
+
+    Corner somePoint;
+
+    public Animator anim;
+    
+    [SerializeField] string killAnimationName;
+    [SerializeField] AudioClip jumpscareSound;
+
     // Start is called before the first frame update
     void Start()
     {
-        currentState = StretchState.Idle;
+        player = GameObject.Find("Player").GetComponent<Player>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        anim = gameObject.GetComponent<Animator>();
+        //currentState = StretchState.Idle;
 
+        /*
         stateMachine = gameObject.AddComponent<StateMachine>();
-        stateMachine.SetState(new IdleState(stateMachine, this));        
+        stateMachine.SetState(new IdleState(stateMachine, this));  
+        */      
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(player.isDead == false && player.currentState != PlayerState.Hiding){
+            agent.SetDestination(player.gameObject.transform.position);
+        }
+        else if(player.currentState == PlayerState.Hiding){
+            agent.SetDestination(somePoint.gameObject.transform.position);
+        }
+        else if(player.isDead == true){
+            agent.SetDestination(player.gameObject.transform.position - Vector3.forward * 2f);
+        }
         
+    }
+
+    public void OnCollisionEnter(Collision col){
+        if(col.gameObject.tag == "Player"){
+            player.isDead = true;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            AudioSource.PlayClipAtPoint(jumpscareSound, transform.position);
+            Kill();
+        }
+    }
+
+    public void Kill(){
+        gameObject.transform.position = player.transform.position - Vector3.forward * 2f;
+        anim.speed = 0;
+        anim.Play(killAnimationName, 0, 0.0f);
     }
 
     public void AlertStretch(Vector3 presumedLocation)

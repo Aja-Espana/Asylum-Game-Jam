@@ -6,8 +6,13 @@ public class HidingPlace : MonoBehaviour
 {
     Player player;
 
+    Vector3 playerOldPosition;
+    [SerializeField] float playerRotation;
+
     public bool canInteract = false;
     public bool isOccupied;
+
+    [SerializeField] int direction;
 
     [SerializeField] string hideAnimationName;
     [SerializeField] string unhideAnimationName;
@@ -19,6 +24,7 @@ public class HidingPlace : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        canInteract = true;
     }
 
     // Update is called once per frame
@@ -27,6 +33,17 @@ public class HidingPlace : MonoBehaviour
         if(isOccupied){
             Unhide();
         }
+
+        if(!isOccupied){
+            canInteract = true;
+        }
+        else{
+            canInteract = false;
+            player.transform.position = gameObject.transform.position;
+        }
+            
+        
+        
     }
 
     public void Hide()
@@ -39,19 +56,35 @@ public class HidingPlace : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(hideSound, transform.position);
             isOccupied = true;
+
+            player.GetComponent<Rigidbody>().isKinematic = true;
+
+            player.transform.rotation = Quaternion.Euler(0,direction,0);
         }
     }
 
     void Unhide()
     {
         if(Input.GetKeyDown(KeyCode.Space)){
-            canInteract = true;
+            canInteract = false;
             player.currentState = PlayerState.Idle;
             Animator anim = player.GetComponent<Animator>();
             anim.Play(unhideAnimationName, 0, 0.0f);
 
             AudioSource.PlayClipAtPoint(unhideSound, transform.position);
+
+
+            player.transform.position = gameObject.transform.position + Vector3.forward * 5 * direction;
+
+            //player.GetComponent<Rigidbody>().isKinematic = false;
+            Invoke("SetKinematicFalse", 0.01f);
+
             isOccupied = false;
         }
+    }
+
+    void SetKinematicFalse()
+    {
+        player.GetComponent<Rigidbody>().isKinematic = false;
     }
 }

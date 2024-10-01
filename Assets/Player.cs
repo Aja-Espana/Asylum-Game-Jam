@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public PlayerState currentState = PlayerState.Idle;
 
+    public bool isDead;
+
+    public Stretch stretch;
+
     [SerializeField] public float sensitivity;
     [SerializeField] float crouchSpeed;
     [SerializeField] float walkSpeed;
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stretch = GameObject.Find("Stretch").GetComponent<Stretch>();
         rb = gameObject.GetComponent<Rigidbody>();
         camera = gameObject.transform.Find("Camera").GetComponent<Camera>();
 
@@ -47,11 +52,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(!isPaused){
+        if(!isPaused && !isDead){
             LookMovement();
-            MovementSpeed();
-
+    
             if(currentState != PlayerState.Hiding){
+                MovementSpeed();
                 InteractionRay();
                 InteractionHandler();
             }
@@ -65,11 +70,35 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!isPaused){
-            Movement();
+        if(!isDead){
+            if(!isPaused){
+                Movement();
+            }
+            HandleCursor();
         }
+        else{
+            camera.transform.LookAt(stretch.transform);
+        }
+
+        UpdateProximityValue();
         
-        HandleCursor();
+    }
+
+    void UpdateProximityValue()
+    {
+        // Calculate the distance to the target
+        float distance = Vector3.Distance(transform.position, stretch.transform.position);
+
+        // Clamp distance to be between 0 and maxDistance
+        distance = Mathf.Clamp(distance, 0, 25f);
+
+        // Calculate the value based on the distance (0 at maxDistance, 10 at 0)
+        float value = Mathf.Lerp(7.5f, 0, distance / 25f);
+
+        GetComponent<VisualEffects>().stress = value;
+
+        // Optionally, you can print or use the value in your logic
+        Debug.Log("Proximity Value: " + value);
     }
 
     void OnTriggerEnter(Collider other)
@@ -224,8 +253,7 @@ public class Player : MonoBehaviour
     }
 
     void LookMovement()
-    {
-        
+    {  
         float h = sensitivity * Input.GetAxis("Mouse X");
         float v = sensitivity * -Input.GetAxis("Mouse Y");
 
