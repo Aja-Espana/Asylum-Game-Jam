@@ -43,7 +43,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stretch = GameObject.Find("Stretch").GetComponent<Stretch>();
+        try{
+            stretch = GameObject.Find("Stretch").GetComponent<Stretch>();
+        }
+        catch{
+
+        }
+        
         rb = gameObject.GetComponent<Rigidbody>();
         camera = gameObject.transform.Find("Camera").GetComponent<Camera>();
 
@@ -80,7 +86,11 @@ public class Player : MonoBehaviour
             camera.transform.LookAt(stretch.transform);
         }
 
-        UpdateProximityValue();
+        if(stretch != null)
+        {
+            UpdateProximityValue();
+        }
+        
         
     }
 
@@ -198,6 +208,7 @@ public class Player : MonoBehaviour
             }
 
             if(Input.GetKey(KeyCode.W)) {
+                Debug.Log("Moving forward");
                 rb.position += transform.forward * Time.deltaTime * movementSpeed;
             }
             else if(Input.GetKey(KeyCode.S)) {
