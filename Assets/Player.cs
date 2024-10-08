@@ -21,11 +21,17 @@ public class Player : MonoBehaviour
 
     public Stretch stretch;
 
+    public Light flashLight;
+
     [SerializeField] public float sensitivity;
     [SerializeField] float crouchSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float lerpSpeed = 5f;
+
+    [SerializeField] GameObject lookAtThis;
+
+    [SerializeField] public Canvas continueScreen;
 
     float movementSpeed;
     float noiseAmplifier;
@@ -52,6 +58,9 @@ public class Player : MonoBehaviour
         
         rb = gameObject.GetComponent<Rigidbody>();
         camera = gameObject.transform.Find("Camera").GetComponent<Camera>();
+        flashLight = camera.transform.Find("Flashlight").GetComponent<Light>();
+
+        continueScreen.enabled = false;
 
         movementSpeed = walkSpeed;
     }
@@ -76,14 +85,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        HandleCursor();
+
         if(!isDead){
             if(!isPaused){
                 Movement();
             }
-            HandleCursor();
         }
         else{
-            camera.transform.LookAt(stretch.transform);
+            camera.transform.LookAt(lookAtThis.transform);
+            flashLight.intensity = 2f;
         }
 
         if(stretch != null)
@@ -277,7 +288,7 @@ public class Player : MonoBehaviour
 
     void HandleCursor()
     {
-        if(isPaused){
+        if(isPaused || isDead){
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
@@ -318,7 +329,7 @@ public class Player : MonoBehaviour
 
     public void PauseHandler()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape) && isDead == false){
             isPaused = !isPaused;
         }
 

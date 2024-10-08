@@ -10,7 +10,6 @@ public class VisualEffects : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        DontDestroyOnLoad(this);
     }
     void Start()
     {

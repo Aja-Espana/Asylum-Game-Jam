@@ -75,7 +75,7 @@ public class Stretch : Entity
     }
 
     public void OnCollisionEnter(Collision col){
-        if(col.gameObject.tag == "Player"){
+        if(col.gameObject.tag == "Player" && player.isDead == false){
             player.isDead = true;
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
             //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
@@ -86,8 +86,13 @@ public class Stretch : Entity
 
     public void Kill(){
         gameObject.transform.position = player.transform.position - Vector3.forward * 2f;
-        agent.speed = 0;
+        agent.speed = 0f;
         AudioSource.PlayClipAtPoint(jumpscareSound, transform.position);
+    }
+
+    public void FlashContinueScreen(){
+        player.GetComponent<VisualEffects>().stress = 0f;
+        player.continueScreen.enabled = true;
     }
 
     public void AlertStretch(Vector3 presumedLocation)
