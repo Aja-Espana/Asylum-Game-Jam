@@ -301,11 +301,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5daee878c6b7b344698f275ebc7cda40,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1492795677}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5daee878c6b7b344698f275ebc7cda40, type: 3}
 --- !u!4 &52697866 stripped
 Transform:
@@ -2687,7 +2683,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.6754716, g: 0.4728301, b: 0.5085904, a: 1}
-  m_Intensity: 1.98
+  m_Intensity: 0.14
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3783,15 +3779,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 5c54a489a7ab8834290117165074e4fd, type: 2}
-<<<<<<< HEAD
---- !u!1 &1492795675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5daee878c6b7b344698f275ebc7cda40,
-    type: 3}
-  m_PrefabInstance: {fileID: 3902196}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1492795677
-=======
 --- !u!1 &1439704014
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,24 +3817,11 @@ RectTransform:
   m_SizeDelta: {x: 866.5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1439704016
->>>>>>> 4aee98588f20c911684a83770f77a322752cce26
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1492795675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0537b74149c4f4842bca003c17158105, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brightness: 0
-  stress: 5
-  fullscreenMaterial: {fileID: -876546973899608171, guid: d8c592affefb77f468c8b3c08792f591,
-    type: 3}
-=======
   m_GameObject: {fileID: 1439704014}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3940,7 +3914,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439704014}
   m_CullTransparentMesh: 1
->>>>>>> 4aee98588f20c911684a83770f77a322752cce26
 --- !u!1 &1492952852
 GameObject:
   m_ObjectHideFlags: 0
@@ -5824,7 +5797,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8792453, g: 0.6619224, b: 0.6619224, a: 1}
   m_Intensity: 10000
   m_Range: 297.11646
   m_SpotAngle: 99.951035
