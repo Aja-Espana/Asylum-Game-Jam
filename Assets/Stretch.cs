@@ -35,8 +35,11 @@ public class Stretch : Entity
 
     public Animator anim;
     
-    [SerializeField] string killAnimationName;
     [SerializeField] AudioClip jumpscareSound;
+
+    [SerializeField] string runningAnimation;
+    [SerializeField] string jumpscareAnimation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +47,14 @@ public class Stretch : Entity
         player = GameObject.Find("Player").GetComponent<Player>();
         agent = gameObject.GetComponent<NavMeshAgent>();
         anim = gameObject.GetComponent<Animator>();
+
+        anim.Play(runningAnimation);
         //currentState = StretchState.Idle;
 
         /*
         stateMachine = gameObject.AddComponent<StateMachine>();
         stateMachine.SetState(new IdleState(stateMachine, this));  
-        */      
+        */
     }
 
     // Update is called once per frame
@@ -71,15 +76,15 @@ public class Stretch : Entity
         if(col.gameObject.tag == "Player"){
             player.isDead = true;
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-            AudioSource.PlayClipAtPoint(jumpscareSound, transform.position);
+            anim.Play(jumpscareAnimation);
             Kill();
         }
     }
 
     public void Kill(){
         gameObject.transform.position = player.transform.position - Vector3.forward * 2f;
-        anim.speed = 0;
-        anim.Play(killAnimationName, 0, 0.0f);
+        agent.speed = 0;
+        AudioSource.PlayClipAtPoint(jumpscareSound, transform.position);
     }
 
     public void AlertStretch(Vector3 presumedLocation)
