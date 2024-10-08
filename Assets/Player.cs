@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public PlayerState currentState = PlayerState.Idle;
 
     public bool isDead;
+    public bool hasAwokenMonster;
 
     public Stretch stretch;
 
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] float runSpeed;
     [SerializeField] float lerpSpeed = 5f;
 
-    [SerializeField] GameObject lookAtThis;
+    [SerializeField] public GameObject lookAtThis;
 
     [SerializeField] public Canvas continueScreen;
 
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
         flashLight = camera.transform.Find("Flashlight").GetComponent<Light>();
 
         continueScreen.enabled = false;
+        continueScreen.GetComponent<AudioSource>().enabled = false;
 
         movementSpeed = walkSpeed;
     }
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if(!isPaused && !isDead){
-            LookMovement();
+            
     
             if(currentState != PlayerState.Hiding){
                 MovementSpeed();
@@ -90,10 +92,17 @@ public class Player : MonoBehaviour
         if(!isDead){
             if(!isPaused){
                 Movement();
+                LookMovement();
             }
         }
         else{
-            camera.transform.LookAt(lookAtThis.transform);
+            try{
+                camera.transform.LookAt(lookAtThis.transform);
+            }
+            catch{
+                
+            }
+            
             flashLight.intensity = 2f;
         }
 
@@ -119,7 +128,7 @@ public class Player : MonoBehaviour
         GetComponent<VisualEffects>().stress = value;
 
         // Optionally, you can print or use the value in your logic
-        Debug.Log("Proximity Value: " + value);
+        //Debug.Log("Proximity Value: " + value);
     }
 
     void OnTriggerEnter(Collider other)
@@ -131,7 +140,7 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("Door"))
         {
-            other.GetComponent<Door>().canInteract = true; 
+            other.transform.parent.GetComponent<Door>().canInteract = true; 
             currentTarget = other.gameObject;
         }
         else if (other.CompareTag("HidingPlace"))
@@ -200,7 +209,7 @@ public class Player : MonoBehaviour
                 currentTarget.GetComponent<Item>().Interact();
             }
             else if(currentTarget.CompareTag("Door")){
-                currentTarget.GetComponent<Door>().Interact();
+                currentTarget.transform.parent.GetComponent<Door>().Interact();
             }
             else if(currentTarget.CompareTag("HidingPlace")){
                 currentTarget.GetComponent<HidingPlace>().Hide();
@@ -219,7 +228,6 @@ public class Player : MonoBehaviour
             }
 
             if(Input.GetKey(KeyCode.W)) {
-                Debug.Log("Moving forward");
                 rb.position += transform.forward * Time.deltaTime * movementSpeed;
             }
             else if(Input.GetKey(KeyCode.S)) {

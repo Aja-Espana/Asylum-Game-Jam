@@ -35,6 +35,7 @@ public class Stretch : Entity
 
     public Animator anim;
     
+    [SerializeField] AudioClip monsterSpawn;
     [SerializeField] AudioClip jumpscareSound;
 
     [SerializeField] string runningAnimation;
@@ -49,6 +50,8 @@ public class Stretch : Entity
         anim = gameObject.GetComponent<Animator>();
 
         anim.Play(runningAnimation);
+
+        AudioSource.PlayClipAtPoint(monsterSpawn, transform.position);
         //currentState = StretchState.Idle;
 
         /*
@@ -82,6 +85,11 @@ public class Stretch : Entity
             anim.Play(jumpscareAnimation);
             Kill();
         }
+        if(col.gameObject.tag == "Door" && col.transform.parent.GetComponent<Door>() != null){
+            if(!col.transform.parent.GetComponent<Door>().isDoorLocked){
+                col.transform.parent.GetComponent<Door>().OpenDoor();
+            }
+        }
     }
 
     public void Kill(){
@@ -93,7 +101,16 @@ public class Stretch : Entity
     public void FlashContinueScreen(){
         player.GetComponent<VisualEffects>().stress = 0f;
         player.continueScreen.enabled = true;
+        player.continueScreen.GetComponent<AudioSource>().enabled = true;
+
+        Invoke("DestroySelf",1.0f);
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
+
 
     public void AlertStretch(Vector3 presumedLocation)
     {
