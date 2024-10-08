@@ -67,7 +67,9 @@ public class Stretch : Entity
             agent.SetDestination(somePoint.gameObject.transform.position);
         }
         else if(player.isDead == true){
-            agent.SetDestination(player.gameObject.transform.position - Vector3.forward * 2f);
+            gameObject.transform.position = player.transform.position + Vector3.forward * 1.4f - Vector3.up * 0.2f;
+            gameObject.transform.LookAt(player.transform);
+            //agent.SetDestination(player.gameObject.transform.position - Vector3.forward * 2f);
         }
         
     }
@@ -76,6 +78,7 @@ public class Stretch : Entity
         if(col.gameObject.tag == "Player"){
             player.isDead = true;
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             anim.Play(jumpscareAnimation);
             Kill();
         }
