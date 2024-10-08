@@ -9,8 +9,6 @@ public abstract class Item : MonoBehaviour
 
     [SerializeField] public int code;
 
-    [SerializeField] bool willAwakenMonster;
-
     protected AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -39,10 +37,6 @@ public abstract class Item : MonoBehaviour
         player.AddItem(this);
         player.currentTarget = null;
         PlaySound();
-
-        if(willAwakenMonster){
-            player.hasAwokenMonster = true;
-        }
     }
 
     public abstract void PlaySound();
