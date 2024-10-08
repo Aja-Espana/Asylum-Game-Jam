@@ -75,7 +75,6 @@
     <Compile Include="Assets\CrouchingIcon.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\VolumeSlider.cs" />
-    <Compile Include="Assets\Spawner.cs" />
     <Compile Include="Assets\HidingPlace.cs" />
     <Compile Include="Assets\Entity.cs" />
   </ItemGroup>
