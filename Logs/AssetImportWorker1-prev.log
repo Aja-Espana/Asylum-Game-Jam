@@ -15,11 +15,7 @@ D:/Projects/Asylum-Game-Jam
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-<<<<<<< HEAD
 56391
-=======
-53661
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 Successfully changed project path to: D:/Projects/Asylum-Game-Jam
 D:/Projects/Asylum-Game-Jam
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -53,21 +49,12 @@ D:/Projects/Asylum-Game-Jam
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-<<<<<<< HEAD
 Player connection [16856] Host "[IP] 10.16.49.9 [Port] 0 [Flags] 2 [Guid] 1932418839 [EditorId] 1932418839 [Version] 1048832 [Id] WindowsEditor(7,Blahaj) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
 Player connection [16856] Host "[IP] 10.16.49.9 [Port] 0 [Flags] 2 [Guid] 1932418839 [EditorId] 1932418839 [Version] 1048832 [Id] WindowsEditor(7,Blahaj) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
 Refreshing native plugins compatible for Editor in 4.54 ms, found 3 plugins.
-=======
-Player connection [47240] Host "[IP] 10.16.49.9 [Port] 0 [Flags] 2 [Guid] 1297524437 [EditorId] 1297524437 [Version] 1048832 [Id] WindowsEditor(7,Blahaj) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
-
-Player connection [47240] Host "[IP] 10.16.49.9 [Port] 0 [Flags] 2 [Guid] 1297524437 [EditorId] 1297524437 [Version] 1048832 [Id] WindowsEditor(7,Blahaj) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
-
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-Refreshing native plugins compatible for Editor in 5.96 ms, found 3 plugins.
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.31f1 (4ede2d13e8b4)
 [Subsystems] Discovering subsystems at path D:/Game Engines/2022.3.31f1/Editor/Data/Resources/UnitySubsystems
@@ -83,7 +70,6 @@ Initialize mono
 Mono path[0] = 'D:/Game Engines/2022.3.31f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Game Engines/2022.3.31f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/Game Engines/2022.3.31f1/Editor/Data/MonoBleedingEdge/etc'
-<<<<<<< HEAD
 Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56680
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
@@ -95,25 +81,11 @@ Mono: successfully reloaded assembly
 - Finished resetting the current domain, in  0.214 seconds
 Domain Reload Profiling: 449ms
 	BeginReloadAssembly (74ms)
-=======
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56904
-Begin MonoManager ReloadAssembly
-Registering precompiled unity dll's ...
-Register platform support module: D:/Game Engines/2022.3.31f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001696 seconds.
-- Loaded All Assemblies, in  0.355 seconds
-Native extension for WindowsStandalone target not found
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.245 seconds
-Domain Reload Profiling: 600ms
-	BeginReloadAssembly (142ms)
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-<<<<<<< HEAD
 	RebuildCommonClasses (23ms)
 	RebuildNativeTypeToScriptingClass (7ms)
 	initialDomainReloadingComplete (36ms)
@@ -136,30 +108,6 @@ Domain Reload Profiling: 600ms
 			BeforeProcessingInitializeOnLoad (2ms)
 			ProcessInitializeOnLoadAttributes (117ms)
 			ProcessInitializeOnLoadMethodAttributes (39ms)
-=======
-	RebuildCommonClasses (27ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (41ms)
-	LoadAllAssembliesAndSetupDomain (134ms)
-		LoadAssemblies (141ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (133ms)
-			TypeCache.Refresh (132ms)
-				TypeCache.ScanAssembly (121ms)
-			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (245ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (188ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (5ms)
-			SetLoadedEditorAssemblies (7ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (136ms)
-			ProcessInitializeOnLoadMethodAttributes (37ms)
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -167,33 +115,21 @@ Domain Reload Profiling: 600ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-<<<<<<< HEAD
 - Loaded All Assemblies, in  0.487 seconds
 Refreshing native plugins compatible for Editor in 1.88 ms, found 3 plugins.
-=======
-- Loaded All Assemblies, in  0.949 seconds
-Refreshing native plugins compatible for Editor in 2.84 ms, found 3 plugins.
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-<<<<<<< HEAD
 - Finished resetting the current domain, in  0.483 seconds
 Domain Reload Profiling: 970ms
 	BeginReloadAssembly (112ms)
-=======
-- Finished resetting the current domain, in  0.551 seconds
-Domain Reload Profiling: 1499ms
-	BeginReloadAssembly (153ms)
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-<<<<<<< HEAD
 		CreateAndSetChildDomain (16ms)
 	RebuildCommonClasses (25ms)
 	RebuildNativeTypeToScriptingClass (7ms)
@@ -228,42 +164,6 @@ Unloading 5143 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 78 unused Assets / (2.1 MB). Loaded Objects now: 5602.
 Memory consumption went from 226.6 MB to 224.5 MB.
 Total: 3.607000 ms (FindLiveObjects: 0.394500 ms CreateObjectMapping: 0.138600 ms MarkObjects: 2.544600 ms  DeleteObjects: 0.528000 ms)
-=======
-		CreateAndSetChildDomain (22ms)
-	RebuildCommonClasses (24ms)
-	RebuildNativeTypeToScriptingClass (7ms)
-	initialDomainReloadingComplete (38ms)
-	LoadAllAssembliesAndSetupDomain (725ms)
-		LoadAssemblies (607ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (213ms)
-			TypeCache.Refresh (180ms)
-				TypeCache.ScanAssembly (164ms)
-			ScanForSourceGeneratedMonoScriptInfo (24ms)
-			ResolveRequiredComponents (8ms)
-	FinalizeReload (552ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (406ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (4ms)
-			SetLoadedEditorAssemblies (3ms)
-			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (48ms)
-			ProcessInitializeOnLoadAttributes (288ms)
-			ProcessInitializeOnLoadMethodAttributes (61ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
-Refreshing native plugins compatible for Editor in 1.63 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5142 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 78 unused Assets / (2.1 MB). Loaded Objects now: 5601.
-Memory consumption went from 226.1 MB to 224.0 MB.
-Total: 4.905500 ms (FindLiveObjects: 0.305900 ms CreateObjectMapping: 0.118500 ms MarkObjects: 4.041300 ms  DeleteObjects: 0.438800 ms)
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -281,7 +181,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-<<<<<<< HEAD
   Time since last request: 624943.297653 seconds.
   path: Assets/Prefabs/Walls/Oxygen_Tank_Oxygen_Tank_M_Metallic.png
   artifactKey: Guid(18fa40e1ac330de448b5a6ec66cc00e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
@@ -320,93 +219,6 @@ Start importing Assets/Prefabs/Walls/Exit_Sign_Metallic.png using Guid(e13b9e4b2
  -> (artifact id: '4066b84cce3eb76cce6755a4ad7095b5') in 0.016502 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 2
-=======
-  Time since last request: 620155.366947 seconds.
-  path: Assets/Stretch.prefab
-  artifactKey: Guid(251ec729716402d4699c14fbe4aa184c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Stretch.prefab using Guid(251ec729716402d4699c14fbe4aa184c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'e9e5b764cc847dfffc0f649217ef4895') in 0.302752 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
-========================================================================
-Received Import Request.
-  Time since last request: 12.311674 seconds.
-  path: Assets/Fonts/AntipastoPro-DemiBold_trial.ttf
-  artifactKey: Guid(b4a565828a6e0084785f6d0cf3dfaa5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-DemiBold_trial.ttf using Guid(b4a565828a6e0084785f6d0cf3dfaa5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '9457189fd4d2b2bd76804efa599c209b') in 0.049740 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
-========================================================================
-Received Import Request.
-  Time since last request: 0.000033 seconds.
-  path: Assets/Fonts/AntipastoPro-Thin_trial SDF.asset
-  artifactKey: Guid(c56bc87cacb236d4a9e3c1813c35bf6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-Thin_trial SDF.asset using Guid(c56bc87cacb236d4a9e3c1813c35bf6c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '1ba012c50b0febfef6cd7a7cab3c95f2') in 0.057994 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 7
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Fonts/AntipastoPro-ExtraBold_trial.ttf
-  artifactKey: Guid(115260b83bbf0d347b8b7d363741f090) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-ExtraBold_trial.ttf using Guid(115260b83bbf0d347b8b7d363741f090) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'b465059db8b23cdb234f57b924519304') in 0.028002 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Fonts/AntipastoPro-Thin_trial 2 SDF.asset
-  artifactKey: Guid(f04ff65ed5bd39340972c1a33648bbc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-Thin_trial 2 SDF.asset using Guid(f04ff65ed5bd39340972c1a33648bbc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '9729ff459afdd464ce1dba164f72a1ce') in 0.049539 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 7
-========================================================================
-Received Import Request.
-  Time since last request: 0.000052 seconds.
-  path: Assets/Fonts/AntipastoPro-Thin_trial.ttf
-  artifactKey: Guid(e4827b8de0dd84245afb4f8a7f0ce26e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-Thin_trial.ttf using Guid(e4827b8de0dd84245afb4f8a7f0ce26e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: 'f69e185737108c869a86c828ac21a969') in 0.011799 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Fonts/AntipastoPro-Medium_trial.ttf
-  artifactKey: Guid(502e7e5bcbb636f419c32571cca9364c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-Medium_trial.ttf using Guid(502e7e5bcbb636f419c32571cca9364c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '0ed7742624ee95385796eba7d5ff0fd3') in 0.012009 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
-========================================================================
-Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Fonts/AntipastoPro-Thin_trial 2.ttf
-  artifactKey: Guid(cbc2225305ee92d41b8e77d152245d44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Fonts/AntipastoPro-Thin_trial 2.ttf using Guid(cbc2225305ee92d41b8e77d152245d44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
-[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
- -> (artifact id: '6d78032828504e624ec23a6fd5a906af') in 0.010493 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 5
->>>>>>> parent of d9588fd (Merge pull request #10 from Aja-Espana/DoorsWorking)
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
 AssetImportWorker is now disconnected from the server
