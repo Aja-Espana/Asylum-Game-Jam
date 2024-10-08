@@ -9,8 +9,6 @@ public class Door : MonoBehaviour
     [SerializeField] string openAnimationName;
     [SerializeField] string closeAnimationName;
 
-    Collider col;
-
     GameObject handle;
     Animator doorAnim;
 
@@ -30,8 +28,8 @@ public class Door : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        handle = gameObject.transform.Find("Handle").gameObject;
         doorAnim = gameObject.GetComponent<Animator>();
-        col = gameObject.transform.Find("Door_").GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -52,13 +50,12 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void OpenDoor()
+    void OpenDoor()
     {
         if(isDoorLocked){
             if(player.SearchInventoryForItemCode(doorCode) != null){
                 UseKey();
                 Debug.Log("Opening door");
-                col.enabled = false;
                 doorAnim.Play(openAnimationName, 0, 0.0f);
                 AudioSource.PlayClipAtPoint(unlockSound, transform.position);
                 AudioSource.PlayClipAtPoint(openSound, transform.position);
@@ -70,7 +67,6 @@ public class Door : MonoBehaviour
         }
         else{
             Debug.Log("Opening door");
-            col.enabled = false;
             doorAnim.Play(openAnimationName, 0, 0.0f);
             AudioSource.PlayClipAtPoint(openSound, transform.position);
             isDoorOpen = true;
@@ -80,7 +76,6 @@ public class Door : MonoBehaviour
     void CloseDoor()
     {
         Debug.Log("Closing door"); 
-        col.enabled = true;
         doorAnim.Play(closeAnimationName, 0, 0.0f);
         AudioSource.PlayClipAtPoint(closeSound, transform.position);
         isDoorOpen = false;

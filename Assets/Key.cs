@@ -6,7 +6,6 @@ public class Key : Item
 {
     [SerializeField] AudioClip keyJingle;
 
-
     public override void PlaySound(){
         AudioSource.PlayClipAtPoint(keyJingle, transform.position);
     }
