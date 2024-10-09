@@ -20,13 +20,13 @@ public class Crosshair : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         HandleCrosshairChange();
     }
 
     void HandleCrosshairChange(){
-        if(player.isPaused){
+        if(player.isPaused || player.isDead){
             image.sprite = null;
         }
         else if(player.currentTarget == null){
@@ -37,8 +37,8 @@ public class Crosshair : MonoBehaviour
             image.sprite = interactIcon;
             image.rectTransform.sizeDelta = new Vector2(50f,50f);
         }
-        else if(player.currentTarget.GetComponent<Door>() != null){
-            if(player.currentTarget.GetComponent<Door>().isDoorLocked){
+        else if(player.currentTarget.transform.parent.GetComponent<Door>() != null){
+            if(player.currentTarget.transform.parent.GetComponent<Door>().isDoorLocked){
                 image.sprite = lockedIcon;
                 image.rectTransform.sizeDelta = new Vector2(50f,50f);
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum PlayerState
 {
@@ -13,16 +14,27 @@ public enum PlayerState
 
 public class Player : MonoBehaviour
 {
+    public CapsuleCollider col;
     public Camera camera;
     public Rigidbody rb;
     public PlayerState currentState = PlayerState.Idle;
 
     public bool isDead;
+    public bool hasWon;
     public bool hasAwokenMonster;
 
     public Stretch stretch;
 
     public Light flashLight;
+
+    private Vector3 previousPosition;
+    private Vector3 currentPosition;
+    public Vector3 velocity;
+
+    public Vector3 lateralVelocity;
+
+    public float crouchedHeight = 1f;
+    public float standingHeight = 2f; 
 
     [SerializeField] public float sensitivity;
     [SerializeField] float crouchSpeed;
@@ -33,6 +45,12 @@ public class Player : MonoBehaviour
     [SerializeField] public GameObject lookAtThis;
 
     [SerializeField] public Canvas continueScreen;
+    [SerializeField] public Canvas winScreen;
+
+    [SerializeField] AudioSource audioSource;
+
+    [SerializeField] AudioClip walkingSound;
+    [SerializeField] AudioClip runningSound;
 
     float movementSpeed;
     float noiseAmplifier;
@@ -58,8 +76,11 @@ public class Player : MonoBehaviour
         }
         
         rb = gameObject.GetComponent<Rigidbody>();
+        col = gameObject.GetComponent<CapsuleCollider>();
         camera = gameObject.transform.Find("Camera").GetComponent<Camera>();
         flashLight = camera.transform.Find("Flashlight").GetComponent<Light>();
+
+        previousPosition = transform.position;
 
         continueScreen.enabled = false;
         continueScreen.GetComponent<AudioSource>().enabled = false;
@@ -94,6 +115,10 @@ public class Player : MonoBehaviour
                 Movement();
                 LookMovement();
             }
+            if(stretch != null)
+            {
+                UpdateProximityValue();
+            }
         }
         else{
             try{
@@ -105,13 +130,6 @@ public class Player : MonoBehaviour
             
             flashLight.intensity = 2f;
         }
-
-        if(stretch != null)
-        {
-            UpdateProximityValue();
-        }
-        
-        
     }
 
     void UpdateProximityValue()
@@ -148,6 +166,9 @@ public class Player : MonoBehaviour
             other.GetComponent<HidingPlace>().canInteract = true;
             currentTarget = other.gameObject;
         }
+        else{
+            currentTarget = null;
+        }
 
         
     }
@@ -161,7 +182,7 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("Door"))
         {
-            other.GetComponent<Door>().canInteract = false;
+            other.transform.parent.GetComponent<Door>().canInteract = false;
             currentTarget = null;
         }
         else if (other.CompareTag("HidingPlace"))
@@ -177,10 +198,12 @@ public class Player : MonoBehaviour
         Vector3 rayDirection = camera.transform.forward;
 
         Ray ray = new Ray(rayOrigin, rayDirection);
-        RaycastHit[] hits = Physics.RaycastAll(ray, 2f);
+        RaycastHit[] rayhits = Physics.RaycastAll(ray, 2f);
 
-        foreach (RaycastHit hit in hits)
-        {
+        currentTarget = null;
+
+        foreach(RaycastHit hit in rayhits){  
+                      
             if (hit.collider.CompareTag("Item"))
             {   
                 currentTarget = hit.collider.gameObject;
@@ -196,7 +219,6 @@ public class Player : MonoBehaviour
                 currentTarget = hit.collider.gameObject;
                 break;
             }
-            currentTarget = null;
         }
 
         Debug.DrawRay(ray.origin, ray.direction * 2f, Color.green);
@@ -218,7 +240,9 @@ public class Player : MonoBehaviour
     }
 
     void Movement()
-    {
+    {   
+        CalculateVelocity();
+
         if(currentState != PlayerState.Hiding){
             if(Input.GetKey(KeyCode.A)) {
                 rb.position += -transform.right * Time.deltaTime * movementSpeed;
@@ -234,39 +258,79 @@ public class Player : MonoBehaviour
                 rb.position += -transform.forward * Time.deltaTime * movementSpeed;
             }
         }
+
+        CrouchHandler();
+    }
+
+    void CrouchHandler()
+    {
+        if(currentState == PlayerState.Crouching){
+            col.height = Mathf.Lerp(col.height, crouchedHeight, Time.deltaTime * lerpSpeed);
+        }
+        else{
+            col.height = Mathf.Lerp(col.height, standingHeight, Time.deltaTime * lerpSpeed);
+        }
     }
 
     void MovementSpeed()
     {
+        if(!audioSource.isPlaying){
+            audioSource.Play();
+        }
+        
         // Smoothly interpolate between walkSpeed and runSpeed based on the player's state
         if (currentState == PlayerState.Running)
         {
+            audioSource.clip = runningSound;
+            
             movementSpeed = Mathf.Lerp(movementSpeed, runSpeed, lerpSpeed * Time.deltaTime);
         }
         else if (currentState == PlayerState.Walking)
         {
+            audioSource.clip = walkingSound;
+
             movementSpeed = Mathf.Lerp(movementSpeed, walkSpeed, lerpSpeed * Time.deltaTime);
         }
         else if(currentState == PlayerState.Crouching)
         {
+            audioSource.clip = null;
             movementSpeed = Mathf.Lerp(movementSpeed, crouchSpeed, lerpSpeed * Time.deltaTime);
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftControl)){
-            currentState = PlayerState.Crouching;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftControl)){
-            currentState = PlayerState.Walking;
+        else{
+            audioSource.clip = null;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+
+
+        if (Input.GetKey(KeyCode.LeftShift) && velocity.magnitude > 1f)
         {
             currentState = PlayerState.Running;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if(Input.GetKey(KeyCode.LeftControl)){
+            currentState = PlayerState.Crouching;
+        }
+        else if (velocity.magnitude > 1f)
         {
             currentState = PlayerState.Walking;
         }
+        else{
+            currentState = PlayerState.Idle;
+        }
+    }
+
+    void CalculateVelocity()
+    {
+        // Store the current position
+        currentPosition = transform.position;
+
+        // Calculate the velocity: (new position - old position) / Time.deltaTime
+        velocity = (currentPosition - previousPosition) / Time.deltaTime;
+
+        // Update the previous position to be the current position for the next frame
+        previousPosition = currentPosition;
+
+        // Optional: Print the velocity to the console
+        //Debug.Log("Manual Velocity: " + velocity);
     }
 
     void NoiseHandler()
@@ -296,7 +360,7 @@ public class Player : MonoBehaviour
 
     void HandleCursor()
     {
-        if(isPaused || isDead){
+        if(isPaused || isDead || hasWon){
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
