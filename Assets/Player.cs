@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] public GameObject lookAtThis;
 
+    [SerializeField] public Canvas pauseMenu;
     [SerializeField] public Canvas continueScreen;
     [SerializeField] public Canvas winScreen;
 
@@ -127,6 +128,7 @@ public class Player : MonoBehaviour
             catch{
                 
             }
+            audioSource.Stop();
             
             flashLight.intensity = 2f;
         }
@@ -401,14 +403,16 @@ public class Player : MonoBehaviour
 
     public void PauseHandler()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && isDead == false){
+        if(Input.GetKeyDown(KeyCode.Escape) && isDead == false && hasWon == false){
             isPaused = !isPaused;
         }
 
         if(isPaused){
+            pauseMenu.enabled = true;
             Time.timeScale = 0;
         }
         else{
+            pauseMenu.enabled = false;
             Time.timeScale = 1;
         }
     }

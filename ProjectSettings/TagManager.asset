@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UIElement
+    uniqueID: 3230467203
+    locked: 0
+  - name: ScreenColor
+    uniqueID: 3986253791
+    locked: 0

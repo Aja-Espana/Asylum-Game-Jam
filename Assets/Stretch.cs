@@ -70,7 +70,8 @@ public class Stretch : Entity
             agent.SetDestination(somePoint.gameObject.transform.position);
         }
         else if(player.isDead == true){
-            gameObject.transform.position = player.transform.position + Vector3.forward * 1.4f - Vector3.up * 0.2f;
+            //gameObject.transform.position = player.transform.position + Vector3.forward * 1.4f - Vector3.up * 0.2f;
+            //player.transform.LookAt(gameObject.transform);
             gameObject.transform.LookAt(player.transform);
             //agent.SetDestination(player.gameObject.transform.position - Vector3.forward * 2f);
         }
